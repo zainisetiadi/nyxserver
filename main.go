@@ -42,7 +42,7 @@ func main() {
 		port = "7860"
 	}
 
-	targetURL, _ := url.Parse("http://127.0.0.1:8080")
+	targetURL, _ := url.Parse("http://127.0.0.1:5555")
 	proxy := httputil.NewSingleHostReverseProxy(targetURL)
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -81,14 +81,14 @@ func handleWS(w http.ResponseWriter, r *http.Request) {
 	}
 	defer clientConn.Close()
 
-	sbConn, err := net.Dial("tcp", "127.0.0.1:8080")
+	sbConn, err := net.Dial("tcp", "127.0.0.1:5555")
 	if err != nil {
 		return
 	}
 	defer sbConn.Close()
 
 	handshake := "GET /moz HTTP/1.1\r\n" +
-		"Host: 127.0.0.1:8080\r\n" +
+		"Host: 127.0.0.1:5555\r\n" +
 		"Connection: Upgrade\r\n" +
 		"Upgrade: websocket\r\n\r\n"
 	if _, err = sbConn.Write([]byte(handshake)); err != nil {
