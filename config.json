@@ -1,0 +1,14 @@
+{
+  "log": { "level": "info" },
+  "inbounds": [
+    {
+      "type": "trojan",
+      "tag": "trojan-httpupgrade-in",
+      "listen": "127.0.0.1",
+      "listen_port": 8080,
+      "users": [ { "password": "1q2w3e4r5t" } ],
+      "transport": { "type": "httpupgrade", "path": "/moz" }
+    }
+  ],
+  "outbounds": [ { "type": "direct", "tag": "direct" } ]
+}
